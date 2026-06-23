@@ -1,0 +1,23 @@
+.logo {
+  font-size: 1.8rem;
+  color: #d4af37;
+}
+
+.nav-link {
+  font-weight: 500;
+  margin: 0 10px;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: #d4af37;
+}
+
+.bi {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.bi:hover {
+  color: #d4af37;
+}

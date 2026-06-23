@@ -1,0 +1,29 @@
+.footer {
+  background: #111;
+  color: white;
+}
+
+.brand {
+  color: #d4af37;
+}
+
+.footer a {
+  color: #ccc;
+  text-decoration: none;
+  line-height: 2;
+}
+
+.footer a:hover {
+  color: #d4af37;
+}
+
+.social-icons i {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.social-icons i:hover {
+  color: #d4af37;
+}

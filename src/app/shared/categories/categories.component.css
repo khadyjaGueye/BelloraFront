@@ -1,0 +1,25 @@
+.categories-section {
+  background: #fff;
+}
+
+.category-card {
+  text-align: center;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+}
+
+.category-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.category-card h5 {
+  margin-top: 15px;
+  font-weight: 600;
+}
