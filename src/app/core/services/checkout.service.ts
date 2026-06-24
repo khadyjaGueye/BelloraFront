@@ -7,11 +7,11 @@ import { Data } from '../models/data';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductServiceService extends RestServiceService<Data>{
+export class CheckoutService extends RestServiceService<Data>{
 
- constructor(http: HttpClient) {
-    super(
-      http,
-       `${environment.apiUrlNode}/products`);
-  }
+  constructor(http: HttpClient) {
+     super (
+       http,
+        `${environment.apiUrlNode}/orders`);
+   }
 }

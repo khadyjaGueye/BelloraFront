@@ -1,0 +1,35 @@
+src/app
+│
+├── core
+│   ├── services
+│   ├── guards
+│   └── interceptors
+│
+├── shared
+│   ├── components
+│   │   ├── navbar
+│   │   ├── footer
+│   │   ├── product-card
+│   │   ├── banner
+│   │   ├── loading
+│   │   └── search-bar
+│
+├── pages
+│   ├── home
+│   ├── products
+│   ├── product-details
+│   ├── categories
+│   ├── cart
+│   ├── checkout
+│   ├── login
+│   ├── register
+│   ├── profile
+│   ├── wishlist
+│   └── contact
+│
+└── admin
+    ├── dashboard
+    ├── products
+    ├── orders
+    ├── customers
+    └── categories

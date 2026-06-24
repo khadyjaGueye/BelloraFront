@@ -1,0 +1,18 @@
+.cart-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.btn-dark {
+    border-radius: 10px;
+}
+
+.sticky-top {
+    top: 100px;
+}

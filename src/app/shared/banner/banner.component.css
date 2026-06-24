@@ -4,7 +4,7 @@
       rgba(0,0,0,0.15),
       rgba(0,0,0,0.15)
     ),
-  url('../../../assets/img/sac.jpeg');
+   url('/assets/img/sac.jpeg');
   background-size: cover;
   background-position: center;
   display: flex;

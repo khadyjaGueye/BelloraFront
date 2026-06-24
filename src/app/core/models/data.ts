@@ -8,9 +8,11 @@ export interface Data {
     categories: Categorie[];
     users: User[];
     medecins: User[];
-    categorie: Categorie
-    message: string;
     products: Product[];
+    categorie: Categorie;
+    checkout:Checkout;
+    message: string;
+    success: boolean
 }
 
 export interface User {
@@ -26,4 +28,23 @@ export interface Categorie {
     libelle: string
     description: string
     image: string
+}
+
+export interface CartItem {
+  product: Product;
+  quantity: number;
+}
+
+export interface Checkout{
+    customer_name: string
+  customer_phone: string
+  customer_address: string
+  total_amount: number
+  items: Item[]
+}
+
+export interface Item {
+  product_id: number
+  quantity: number
+  price: number
 }
