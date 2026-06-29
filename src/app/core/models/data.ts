@@ -12,17 +12,20 @@ export interface Data {
     categorie: Categorie;
     checkout:Checkout;
     message: string;
-    success: boolean
+    success: boolean,
+    token:string
 }
 
 export interface User {
-    id: number
-    email: string
-    password: string
-    role: string
-    nom: string
-    prenom: string
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  role: 'customer' | 'admin';
+  is_active: boolean;
 }
+
 export interface Categorie {
     id: number
     libelle: string
@@ -48,3 +51,23 @@ export interface Item {
   quantity: number
   price: number
 }
+
+export interface AuthResponse {
+  data: {
+    success: boolean;
+    message: string;
+    token: string;
+    user: {
+      id: number;
+      first_name: string;
+      last_name: string;
+      email: string;
+      phone: string;
+      role: string;
+      is_active: number;
+      created_at: string;
+      updated_at: string;
+    };
+  };
+}
+

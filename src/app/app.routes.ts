@@ -7,6 +7,9 @@ import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { authGuard } from './core/guards/auth.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { DasbordComponent } from './admin/dasbord/dasbord.component';
 
 export const routes: Routes = [
 
@@ -17,6 +20,14 @@ export const routes: Routes = [
   { path: 'wishlist', component: WishlistComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'checkout', component: CheckoutComponent }
-  
+  { path: 'profil', component: ProfileComponent },
+  { path: 'dashbord', component: DasbordComponent },
+
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+    canActivate: [authGuard]
+  }
+  // { path: 'checkout', component: CheckoutComponent }
+
 ];

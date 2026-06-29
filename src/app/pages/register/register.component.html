@@ -1,1 +1,61 @@
-<p>register works!</p>
+<div class="container-register">
+    <div class="card-register">
+        <div class="left-panel">
+            <div class="text-center mb-4">
+                <a routerLink="/"> <img src="assets/img/sac.jpeg" alt="Logo" class="logo"></a>
+                <h4>Créer un compte</h4>
+            </div>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label class="form-label">Nom</label>
+                    <input type="text" formControlName="firstName" class="form-control" [ngClass]="{'is-valid': form.get('firstName')?.valid && form.get('firstName')?.touched,
+                       'is-invalid': form.get('firstName')?.invalid && form.get('firstName')?.touched}">
+                    <div class="invalid-feedback">Le nom est requis.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Prénom</label>
+                    <input type="text" formControlName="lastName" class="form-control" [ngClass]="{'is-valid': form.get('lastName')?.valid && form.get('lastName')?.touched,
+                       'is-invalid': form.get('lastName')?.invalid && form.get('lastName')?.touched}">
+                    <div class="invalid-feedback">Le prénom est requis.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Téléphone</label>
+                    <input type="text" formControlName="phone" class="form-control" [ngClass]="{'is-valid': form.get('phone')?.valid && form.get('phone')?.touched,
+                       'is-invalid': form.get('phone')?.invalid && form.get('phone')?.touched}">
+                    <div class="invalid-feedback">Numéro invalide (8–15 chiffres).</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" formControlName="email" class="form-control" [ngClass]="{'is-valid': form.get('email')?.valid && form.get('email')?.touched,
+                       'is-invalid': form.get('email')?.invalid && form.get('email')?.touched}">
+                    <div class="invalid-feedback">Adresse email invalide.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Mot de passe</label>
+                    <div class="input-group">
+                        <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                            class="form-control" [ngClass]="{'is-valid': form.get('password')?.valid && form.get('password')?.touched,
+                         'is-invalid': form.get('password')?.invalid && form.get('password')?.touched}">
+                        <button class="btn btn-outline-secondary" type="button" (click)="togglePassword()">
+                            <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                        </button>
+                    </div>
+                    <div class="invalid-feedback">Minimum 5 caractères.</div>
+                </div>
+
+                <button type="submit" class="btn btn-custom w-100">S'inscrire</button>
+            </form>
+
+        </div>
+
+        <div class="right-panel">
+            <h3>Bienvenue à bord !</h3>
+            <p>Déjà inscrit ?</p>
+            <a routerLink="/auth/login" class="btn btn-light">Se connecter</a>
+        </div>
+    </div>
+</div>

@@ -39,7 +39,8 @@
 
         <i class="bi bi-heart fs-5"></i>
 
-        <a routerLink="/cart" class="cart-icon position-relative text-dark text-decoration-none" [class.animate]="animate">
+        <a routerLink="/cart" class="cart-icon position-relative text-dark text-decoration-none"
+          [class.animate]="animate">
           <i class="bi bi-cart3 fs-4"></i>
           @if(cartCount > 0){
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -48,9 +49,21 @@
           }
         </a>
 
-        <button class="btn btn-outline-dark rounded-pill">
+        <!-- Si pas connecté -->
+        <button *ngIf="!utilService.isLoggedIn()" class="btn btn-outline-dark rounded-pill" routerLink="/login">
           Connexion
         </button>
+        <button *ngIf="!utilService.isLoggedIn()" class="btn btn-outline-dark rounded-pill" routerLink="/register">
+          Register
+        </button>
+
+        <!-- Si connecté -->
+        <button *ngIf="utilService.isLoggedIn()" class="btn btn-outline-dark rounded-pill" (click)="logout()">
+          Déconnexion
+        </button>
+        <a *ngIf="utilService.isLoggedIn()" routerLink="/profile" class="btn btn-outline-dark rounded-pill">
+          <i class="bi bi-person-circle"></i>
+        </a>
 
       </div>
 

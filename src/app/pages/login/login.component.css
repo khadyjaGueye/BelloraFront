@@ -1,0 +1,51 @@
+.container-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card-login {
+    display: flex;
+    width: 800px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #d4af37; /* Accent doré */
+}
+
+.left-panel {
+    background-color: #fff;
+    padding: 40px;
+    flex: 1;
+}
+
+.right-panel {
+    background: linear-gradient(135deg, #d4af37, #469e77); /* Doré + vert */
+    color: #fff;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-custom {
+    background-color: #d4af37; /* Bouton doré */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-custom:hover {
+    background-color: #b38f2c; /* Doré plus foncé au hover */
+}
+
+.logo {
+    width: 90px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 5px #d4af37); /* Halo doré */
+}
