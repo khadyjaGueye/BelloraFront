@@ -7,4 +7,7 @@ export interface Product {
   image: string;
   category: string;
   isPromo?: boolean;
+  stock:string;
+  category_id:number;
+  category_name:string;
 }

@@ -11,37 +11,48 @@ import { UserComponent } from '../user/user.component';
 @Component({
   selector: 'app-dasbord',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,FormsModule,ProductsComponent,CustomersComponent,CategoriesComponent,OrdersComponent,StaticComponent,UserComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, ProductsComponent, CustomersComponent, CategoriesComponent, OrdersComponent, StaticComponent, UserComponent],
   templateUrl: './dasbord.component.html',
   styleUrl: './dasbord.component.css'
 })
 export class DasbordComponent {
 
-display: string = 'dashbord';
+  display: string = 'dashbord';
+  sidebarOpen: boolean = false;
 
-  constructor() {}
+  constructor() { }
+
+  toggleSidebar(): void {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
 
   displayDashbord(): void {
     this.display = 'dashbord';
+    this.sidebarOpen =  false;
   }
 
   displayProducts(): void {
     this.display = 'product';
+     this.sidebarOpen =  false;
   }
 
   displayCategory(): void {
     this.display = 'category';
+     this.sidebarOpen =  false;
   }
 
   displayOrders(): void {
     this.display = 'order';
+     this.sidebarOpen =  false;
   }
 
   displayCustomers(): void {
     this.display = 'customer';
+     this.sidebarOpen =  false;
   }
 
   displayUser(): void {
     this.display = 'user';
+     this.sidebarOpen =  false;
   }
 }

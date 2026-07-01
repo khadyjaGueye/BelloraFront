@@ -1,3 +1,79 @@
 /* You can add global styles to this file, and also import other style files */
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "bootstrap-icons/font/bootstrap-icons.css";
+
+:root {
+
+    /* Couleurs principales */
+    --primary-color: #d4af37;
+    --secondary-color: #325d67;
+
+    --metallique-color: #d4af37;
+    --gris-anthracite-color: #4A4A4A;
+    --gris-souris-color: #A6A6A6;
+    --blanc-creme-color: #FDFBF7;
+    --beige-sable-color:#E6DFD3;
+    --taupe-clair: #B0A898;
+    --bleu-roi :#0047AB;
+    --bleu-canard :#FFFFFF;
+
+    /* Variantes roses */
+    --pink-color: #f799c5;
+    --light-pink-color: #fbcde9;
+    --fuchsia-color: #f472b6;
+    --rose-plum-color: #c86da3;
+    --soft-pink-color: #f8c2d2;
+
+
+    /* Variantes bleu pétrole*/
+    --dark-color: #24464d;
+    --light-color: #4d7b86;
+    --soft-color: #7fa0a8;
+    --pastel-color: #c8d7db;
+    --deep-color: #1d3940;
+    --hover-color: #3d6f7a;
+
+    /* Violet */
+    --mauve-color: #8e6888;
+
+    /* Couleurs générales */
+    --white-color: #ffffff;
+    --dark-color: #212529;
+    --pearl-color: #f8f5ee;
+
+    /* Etats */
+    --success-color: #00c853;
+    --warning-color: #ffc107;
+    --danger-color: #ED2F09;
+
+}
+
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-success {
+    background-color: var(--success-color) !important;
+    border-color: var(--success-color) !important;
+}
+
+.btn-warning {
+    background-color: var(--warning-color) !important;
+    border-color: var(--warning-color) !important;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+}
+
+.btn-accent {
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+}
+
+.btn-soft-accent {
+    background-color: var(--soft-accent-color) !important;
+    border-color: var(--soft-accent-color) !important;
+}

@@ -18,7 +18,7 @@ export abstract class RestServiceService<T> {
     return this.http.post<Model<Data>>(`${this.apiUrl}`, data);
   }
 
-  show(id: string): Observable<Model<Data>> {
+  show(id: number | string): Observable<Model<Data>> {
     return this.http.get<Model<Data>>(`${this.apiUrl}/${id}`);
   }
 

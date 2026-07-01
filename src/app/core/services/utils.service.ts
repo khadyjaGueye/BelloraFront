@@ -1,18 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
-
-  constructor() { }
+  private platformId = inject(PLATFORM_ID);
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    if (isPlatformBrowser(this.platformId)) {
+      return !!localStorage.getItem('token');
+    }
+    return false; // côté serveur, on considère non connecté
   }
 
   logout() {
-    localStorage.removeItem('token');
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('token');
+    }
   }
-
 }

@@ -9,6 +9,7 @@ export interface Data {
     users: User[];
     medecins: User[];
     products: Product[];
+    product:Product
     categorie: Categorie;
     checkout:Checkout;
     message: string;
@@ -28,7 +29,7 @@ export interface User {
 
 export interface Categorie {
     id: number
-    libelle: string
+    name: string
     description: string
     image: string
 }

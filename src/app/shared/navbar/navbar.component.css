@@ -1,6 +1,6 @@
 .logo {
   font-size: 1.8rem;
-  color: #d4af37;
+  color: var(--primary-color);
 }
 
 .nav-link {
@@ -10,7 +10,7 @@
 }
 
 .nav-link:hover {
-  color: #d4af37;
+  color: var(--primary-color);
 }
 
 .bi {
@@ -19,7 +19,7 @@
 }
 
 .bi:hover {
-  color: #d4af37;
+  color: var(--primary-color);
 }
 
 .badge {
