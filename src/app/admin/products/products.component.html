@@ -141,45 +141,68 @@
 
 
 <!-- Modal Edit -->
+<!-- Modal Edit -->
 <div class="modal fade" id="productModalEdit" tabindex="-1" aria-labelledby="productModalEditLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="productModalEditLabel">Modifier le produit</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-            </div>
-            <div class="modal-body">
-                <form [formGroup]="editForm" (ngSubmit)="updateProduct()">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nom</label>
-                        <input id="name" type="text" class="form-control" formControlName="name">
-                    </div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
 
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea id="description" class="form-control" formControlName="description"></textarea>
-                    </div>
+      <!-- Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="productModalEditLabel">Modifier le produit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
 
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Prix</label>
-                        <input id="price" type="number" class="form-control" formControlName="price">
-                    </div>
+      <!-- Body -->
+      <div class="modal-body">
+        <form [formGroup]="editForm" (ngSubmit)="updateProduct()">
+          <!-- Nom -->
+          <div class="mb-3">
+            <label for="name" class="form-label">Nom</label>
+            <input id="name" type="text" class="form-control" formControlName="name">
+          </div>
 
-                    <div class="mb-3">
-                        <label for="stock" class="form-label">Stock</label>
-                        <input id="stock" type="number" class="form-control" formControlName="stock">
-                    </div>
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" class="form-control" formControlName="description"></textarea>
+          </div>
 
-                    <div class="mb-3">
-                        <label for="category" class="form-label">Catégorie</label>
-                        <select id="category" class="form-select" formControlName="category_id">
-                            <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
-                        </select>
-                    </div>
+          <!-- Prix -->
+          <div class="mb-3">
+            <label for="price" class="form-label">Prix</label>
+            <input id="price" type="number" class="form-control" formControlName="price">
+          </div>
 
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                </form>
-            </div>
-        </div>
+          <!-- Stock -->
+          <div class="mb-3">
+            <label for="stock" class="form-label">Stock</label>
+            <input id="stock" type="number" class="form-control" formControlName="stock">
+          </div>
+
+          <!-- Catégorie -->
+          <div class="mb-3">
+            <label for="category" class="form-label">Catégorie</label>
+            <select id="category" class="form-select" formControlName="category_id">
+              <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+            </select>
+          </div>
+
+          <!-- Image -->
+          <div class="mb-3">
+            <label for="editImage" class="form-label">Image</label>
+            <input type="file" (change)="onEditFileSelected($event)" class="form-control" id="editImage">
+          </div>
+
+          <!-- Prévisualisation -->
+          <div *ngIf="editPreviewUrl" class="text-center mt-3">
+            <img [src]="editPreviewUrl || editForm.value.image" alt="Prévisualisation"
+                 class="img-fluid rounded shadow-sm" style="max-height: 200px;">
+          </div>
+
+          <!-- Bouton -->
+          <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
+        </form>
+      </div>
     </div>
+  </div>
 </div>

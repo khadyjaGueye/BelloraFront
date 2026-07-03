@@ -1,1 +1,107 @@
-<p>profile works!</p>
+<app-navbar></app-navbar>
+<div class="container mt-5">
+    <div class="container mt-5">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+            <div class="row">
+
+                <!-- Carte photo -->
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header text-center fw-bold">Photo de profil</div>
+                        <div class="card-body text-center">
+                            <img [src]="preview || 'assets/img/avatar.png'" class="img-thumbnail rounded-circle mb-3"
+                                width="150" height="150" alt="Avatar">
+                            <p class="text-muted">JPG ou PNG (max 5Mo)</p>
+                            <input type="file" class="form-control mb-3" (change)="onFileSelected($event)">
+                            <button class="btn btn-primary w-100">Téléverser une nouvelle image</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte détails -->
+                <div class="col-md-8">
+                    <div class="card shadow-sm">
+                        <div class="card-header fw-bold">Détails du compte</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Prénom</label>
+                                    <input type="text" class="form-control" formControlName="first_name">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nom</label>
+                                    <input type="text" class="form-control" formControlName="last_name">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Téléphone</label>
+                                    <input type="text" class="form-control" formControlName="phone">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="text" class="form-control" formControlName="email">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Adresse</label>
+                                <input type="text" class="form-control" formControlName="address">
+                            </div>
+                            <div class="text-center mt-3">
+                                <button type="submit" class="btn btn-primary px-4">Enregistrer les
+                                    modifications</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Carte mot de passe -->
+<div class="d-flex justify-content-center mt-4">
+    <div class="card shadow-sm" style="width: 400px;">
+        <div class="card-header text-center fw-bold">Changer le mot de passe</div>
+        <div class="card-body">
+            <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()">
+                <div class="mb-3">
+                    <label class="form-label">Ancien mot de passe</label>
+                    <div class="input-group">
+                        <input [type]="showPassword ? 'text' : 'password'" class="form-control"
+                            formControlName="old_password" class="form-control" id="password"
+                            placeholder="Entrez l'ancien mot de passe">
+                        <button class="btn btn-outline-secondary" type="button" (click)="togglePassword()">
+                            <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Nouveau mot de passe</label>
+                    <div class="input-group">
+                        <input [type]="showPassword ? 'text' : 'password'" class="form-control"
+                            formControlName="new_password" placeholder="Entrez le nouveau mot de passe">
+                        <button class="btn btn-outline-secondary" type="button" (click)="togglePassword()">
+                            <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Confirmer le mot de passe</label>
+                    <div class="input-group">
+                        <input [type]="showPassword ? 'text' : 'password'" class="form-control"
+                            formControlName="confirm_password" placeholder="Confirmez le mot de passe">
+                        <button class="btn btn-outline-secondary" type="button" (click)="togglePassword()">
+                            <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Changer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<app-footer></app-footer>

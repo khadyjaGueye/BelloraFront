@@ -27,8 +27,7 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form);
-
+      //console.log(this.form);
       this.authService.login(this.form.value).subscribe({
         next: (res) => {
           localStorage.setItem('token', res.data.token);

@@ -7,6 +7,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CheckoutService } from '../../core/services/checkout.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { UtilsService } from '../../core/services/utils.service';
 
 @Component({
   selector: 'app-checkout',
@@ -28,7 +29,7 @@ export class CheckoutComponent implements OnInit {
     note: new FormControl('')
   });
 
-  constructor(private cartService: CartService, private checkoutService: CheckoutService,  private router: Router) { }
+  constructor(private cartService: CartService, private checkoutService: CheckoutService,  private router: Router,private utilService:UtilsService) { }
 
   ngOnInit(): void {
 

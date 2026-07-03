@@ -7,8 +7,9 @@ export interface Model<T> {
 export interface Data {
     categories: Categorie[];
     users: User[];
-    medecins: User[];
+    user: User;
     products: Product[];
+    orders:Order[];
     product:Product
     categorie: Categorie;
     checkout:Checkout;
@@ -25,6 +26,8 @@ export interface User {
   phone: string;
   role: 'customer' | 'admin';
   is_active: boolean;
+    exp: number;
+  iat: number;
 }
 
 export interface Categorie {
@@ -71,4 +74,17 @@ export interface AuthResponse {
     };
   };
 }
+
+
+export interface Order{
+  id:number;
+  customer_name:string;
+  customer_phone:string;
+  customer_address:string;
+  total_amount:string;
+  status:string;
+  user_id:number;
+  created_at:string;
+}
+
 

@@ -7,11 +7,23 @@ import { RestServiceService } from './rest.service.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserServiceService extends RestServiceService<Data>{
+export class UserServiceService {
 
-   constructor(http: HttpClient) {
-    super(
-      http,
-       `${environment.apiUrlNode}/users`);
-  }
+   constructor(private http: HttpClient) {}
+
+update(data: FormData) {
+  return this.http.put(`${environment.apiUrlNode}/users/profile`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  });
+}
+
+changePassword(data:any){
+   return this.http.put(`${environment.apiUrlNode}/users/change-password`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  });
+}
 }

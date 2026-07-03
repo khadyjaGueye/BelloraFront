@@ -1,1 +1,98 @@
-<p>orders works!</p>
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h5 class="mb-0">Liste des commandes</h5>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Client</th>
+                    <th>Téléphone</th>
+                    <th>Montant</th>
+                    <th>Statut</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders">
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.customer_name }}</td>
+                    <td>{{ order.customer_phone }}</td>
+                    <td>{{ order.total_amount }}</td>
+                    <td>
+                        <span class="badge d-flex align-items-center gap-1"
+                            [ngClass]="getStatusBadge(order.status).color">
+                            <i [class]="getStatusBadge(order.status).icon"></i>
+                            {{ order.status }}
+                        </span>
+                    </td>
+
+
+                    <td>{{ order.created_at}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="viewDetails(order)" data-bs-toggle="modal"
+                            data-bs-target="#orderDetailsModal">
+                            <i class="bi bi-eye"></i> Détails
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal détails -->
+<div class="modal fade" id="orderDetailsModal" aria-labelledby="orderDetailsModalLabel" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Détails commande #{{ selectedOrder?.id }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" *ngIf="selectedOrder">
+                <p><strong>Client :</strong> {{ selectedOrder.customer_name }}</p>
+                <p><strong>Téléphone :</strong> {{ selectedOrder.customer_phone }}</p>
+                <p><strong>Adresse :</strong> {{ selectedOrder.customer_address }}</p>
+
+                <h6>Produits :</h6>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Quantité</th>
+                            <th>Prix</th>
+                            <th>Sous-total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of selectedOrder.items">
+                            <td>{{ item.product_name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.quantity * item.price }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="text-end"><strong>Total :</strong> {{ selectedOrder.total_amount }}</p>
+            </div>
+            <div class="modal-footer" *ngIf="selectedOrder">
+                <div class="d-flex align-items-center gap-3 w-100">
+                    <label for="statusSelect" class="form-label mb-0">Statut :</label>
+                    <select id="statusSelect" class="form-select form-select-sm w-auto"
+                        [(ngModel)]="selectedOrder.status">
+                        <option value="en_attente">En attente</option>
+                        <option value="confirmee">Confirmée</option>
+                        <option value="livree">Livrée</option>
+                        <option value="annulee">Annulée</option>
+                    </select>
+                    <button class="btn btn-primary" (click)="updateStatus(selectedOrder)">Mettre à jour</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
