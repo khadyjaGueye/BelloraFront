@@ -6,13 +6,15 @@
                 Les produits les plus appréciés par nos clientes
             </p>
         </div>
+
         <div class="row g-4">
             @for(product of products; track product.id){
             <div class="col-md-3">
                 <div class="product-card">
-                    <img
+                    <!-- <img
                         [src]="'http://localhost:3000/uploads/products/' + product.image"
-                        [alt]="product.name">
+                        [alt]="product.name"> -->
+                    <img [src]="product.image" [alt]="product.name">
                     <div class="product-content">
                         <h5>{{ product.name }}</h5>
                         <p class="text-muted">
@@ -23,7 +25,7 @@
                                 {{ product.price | number }} FCFA
                             </span>
                         </div>
-                        <button class="btn btn-dark w-100 mt-3"  (click)="addToCart(product)">
+                        <button class="btn btn-dark w-100 mt-3" (click)="addToCart(product)">
                             Ajouter au panier
                         </button>
                     </div>

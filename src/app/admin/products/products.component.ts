@@ -7,12 +7,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CategoryServiceService } from '../../core/services/category.service.service';
 import { Categorie } from '../../core/models/data';
 import Swal from 'sweetalert2';
+import { LoaderService } from '../../core/services/loader.service';
+import { SkeletonComponent } from '../../shared/skeleton/skeleton.component';
 
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxPaginationModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxPaginationModule,SkeletonComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -27,11 +29,13 @@ export class ProductsComponent implements OnInit {
   product?: Product;
   editPreviewUrl: string | ArrayBuffer | null = null;
   editSelectedFile: File | null = null;
+  isSubmitting:boolean = false;
 
   constructor(
     private productService: ProductServiceService,
     private fb: FormBuilder,
     private categoryService: CategoryServiceService,
+    public loaderService: LoaderService
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -58,10 +62,16 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
-    this.productService.all().subscribe(rep => {
-      this.products = rep.data.products;
-      //console.log(this.products);
-    })
+    this.loaderService.show(); 
+    this.productService.all().subscribe({
+      next: (res: any) => {
+        this.products = res.data.products;
+        this.loaderService.hide();
+      },
+      error: () => {
+        this.loaderService.hide();
+      }
+    });
   }
 
   getCategories() {
@@ -99,6 +109,7 @@ export class ProductsComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
+      this.isSubmitting = true; // active le loader
       const formData = new FormData();
       formData.append('name', this.form.get('name')?.value);
       formData.append('description', this.form.get('description')?.value);
@@ -120,9 +131,8 @@ export class ProductsComponent implements OnInit {
             confirmButtonText: 'OK'
           });
           this.form.reset();
-
-
           this.getProducts();
+          this.isSubmitting = false; // désactive le loader
         },
         error: (err) => {
           Swal.fire({
@@ -195,7 +205,6 @@ export class ProductsComponent implements OnInit {
       next: (res) => {
         const product = res.data.product;
         this.editForm.patchValue(product);
-
       }
     });
   }
@@ -232,7 +241,4 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
-
-
-
 }
