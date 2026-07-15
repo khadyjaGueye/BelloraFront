@@ -39,7 +39,7 @@ export class LoginComponent {
         },
         error: (err) => {
           console.error('Erreur inscription', err);
-          Swal.fire({
+          Swal.fire({ 
             icon: 'error',
             title: 'Erreur de connexion',
             text: err.error?.data?.message || 'Une erreur est survenue.',
