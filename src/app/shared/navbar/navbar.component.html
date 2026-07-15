@@ -17,11 +17,22 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/products">Parfums</a>
+          <a class="nav-link" routerLink="/products">Produits</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/products">Accessoires</a>
+        <!-- Menu déroulant Accessoires -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="accessoiresDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Accessoires
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="accessoiresDropdown">
+            <li *ngFor="let category of categories">
+              <a class="dropdown-item" [routerLink]="['/product-detail', category.id]">
+                {{ category.name }}
+              </a>
+            </li>
+          </ul>
         </li>
 
         <li class="nav-item">

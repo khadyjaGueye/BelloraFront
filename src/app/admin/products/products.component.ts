@@ -30,6 +30,7 @@ export class ProductsComponent implements OnInit {
   editPreviewUrl: string | ArrayBuffer | null = null;
   editSelectedFile: File | null = null;
   isSubmitting:boolean = false;
+  creatingTweet = false
 
   constructor(
     private productService: ProductServiceService,
@@ -83,7 +84,7 @@ export class ProductsComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-    const file = event.target.files[0]; // ✅ objet File
+    const file = event.target.files[0]; // objet File
     if (file) {
       this.form.patchValue({ image: file });
       this.form.get('image')?.updateValueAndValidity();
@@ -94,14 +95,12 @@ export class ProductsComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.editSelectedFile = file;
-
       // Prévisualisation
       const reader = new FileReader();
       reader.onload = () => {
         this.editPreviewUrl = reader.result;
       };
       reader.readAsDataURL(file);
-
       // Mettre à jour le formGroup
       this.editForm.patchValue({ image: file });
     }

@@ -1,1 +1,156 @@
-<p>categories works!</p>
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-color" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+            <i class="bi bi-plus"></i> Ajouter
+        </button>
+    </div>
+</div>
+
+<!-- Skeleton Loader -->
+<div class="card mt-5 shadow-sm" *ngIf="loaderService.loading$ | async">
+    <div class="card-header">Liste des produits</div>
+    <div class="card-body">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th colspan="3">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <app-skeleton *ngFor="let i of [1,2,3,4]"></app-skeleton>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Tableau Produits -->
+<div class="card mt-5 shadow-sm" *ngIf="!(loaderService.loading$ | async)">
+    <div class="card-header">Liste des produits</div>
+    <div class="card-body">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th colspan="3">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let category of categories | paginate: { itemsPerPage: 4, currentPage: page }">
+                    <td>{{ category.id }}</td>
+                    <td><img [src]="category.image" width="40" height="40" class="img-thumbnail"></td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.description }}</td>
+                    <td><i (click)="deletecategory(category.id)" class="bi bi-trash-fill text-danger"></i></td>
+                    <td><i (click)="openModalcategory(category.id)" class="bi bi-pencil-square text-primary"
+                            data-bs-toggle="modal" data-bs-target="#categoryModalEdit"></i></td>
+                    <td><i (click)="showcategory(category.id)" class="bi bi-eye-fill text-success"
+                            data-bs-toggle="modal" data-bs-target="#categoryModal"></i></td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+</div>
+
+
+<!-- Modale ajout category-->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addProductCategoryLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">Ajouter un categorie</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <!-- Form -->
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="categoryName" class="form-label">Nom du categorie</label>
+                        <input type="text" formControlName="name" class="form-control" id="categoryName"
+                            placeholder="Entrez le nom">
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryDescription" class="form-label">Description</label>
+                        <input type="text" formControlName="description" class="form-control" id="categoryDescription"
+                            placeholder="Entrez la description">
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryImage" class="form-label">Image</label>
+                        <input type="file" (change)="onFileSelected($event)" formControlName="image"
+                            class="form-control" id="categoryImage">
+                    </div>
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-color" [disabled]="isSubmitting">
+                        <span *ngIf="!isSubmitting">Enregistrer</span>
+                        <span *ngIf="isSubmitting">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Enregistrement...
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Category-->
+<div class="modal fade" id="categoryModalEdit" tabindex="-1" aria-labelledby="categoryModalEditLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="categoryModalEditLabel">Modifier le produit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body">
+                <form [formGroup]="editForm" (ngSubmit)="updateCategory()">
+                    <!-- Nom -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nom</label>
+                        <input id="name" type="text" class="form-control" formControlName="name">
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea id="description" class="form-control" formControlName="description"></textarea>
+                    </div>
+                    <!-- Image -->
+                    <div class="mb-3">
+                        <label for="editImage" class="form-label">Image</label>
+                        <input type="file" (change)="onEditFileSelected($event)" class="form-control" id="editImage">
+                    </div>
+                    <!-- Prévisualisation -->
+                    <div *ngIf="editPreviewUrl" class="text-center mt-3">
+                        <img [src]="editPreviewUrl || editForm.value.image" alt="Prévisualisation"
+                            class="img-fluid rounded shadow-sm" style="max-height: 200px;">
+                    </div>
+                    <!-- Bouton -->
+                    <button type="submit" class="btn btn-primary mt-3">
+                        <span *ngIf="!isSubmitting">Enregistrer</span>
+                        <span *ngIf="isSubmitting">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Mis a jour...
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

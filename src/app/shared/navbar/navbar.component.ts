@@ -4,6 +4,8 @@ import { RouterLink } from '@angular/router';
 import { UtilsService } from '../../core/services/utils.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CategoryServiceService } from '../../core/services/category.service.service';
+import { Categorie } from '../../core/models/data';
 
 @Component({
   selector: 'app-navbar',
@@ -16,8 +18,13 @@ export class NavbarComponent implements OnInit {
 
   cartCount = 0;
   animate = false;
+  categories:Categorie[]=[];
 
-  constructor(private cartService: CartService,public utilService : UtilsService) { }
+  constructor(
+    private cartService: CartService,
+    public utilService : UtilsService,
+    private categoryService:CategoryServiceService
+  ) { }
 
   ngOnInit(): void {
     this.cartService.cartCount$
@@ -30,6 +37,7 @@ export class NavbarComponent implements OnInit {
           setTimeout(() => this.animate = false, 500);
         }
       });
+      this.getCategories();
   }
 
    logout() {
@@ -38,4 +46,9 @@ export class NavbarComponent implements OnInit {
     // this.router.navigate(['/']);
   }
 
+  getCategories(){
+    this.categoryService.all().subscribe((res)=>{
+      this.categories=res.data.categories;
+    })
+  }
 }

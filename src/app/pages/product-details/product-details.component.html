@@ -1,1 +1,50 @@
-<p>product-details works!</p>
+<div class="page-wrapper d-flex flex-column min-vh-100">
+    <app-navbar></app-navbar>
+<section class="featured-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Produits Vedettes</h2>
+            <p class="text-muted">
+                Les produits les plus appréciés par nos clientes
+            </p>
+        </div>
+
+        <!-- Loader -->
+        <div class="text-center" *ngIf="loading">
+            <div class="spinner-border text-dark" role="status">
+                <span class="visually-hidden">Chargement...</span>
+            </div>
+        </div>
+
+        <!-- Message si aucun produit -->
+        <div class="text-center text-muted" *ngIf="!loading && products.length === 0">
+            Aucun produit disponible pour cette catégorie.
+        </div>
+
+        <!-- Liste des produits -->
+        <div class="row g-4" *ngIf="!loading && products.length > 0">
+            @for(product of products; track product.id){
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img [src]="product.image" [alt]="product.name">
+                    <div class="product-content">
+                        <h5>{{ product.name }}</h5>
+                        <p class="text-muted">{{ product.description }}</p>
+                        <div class="price">
+                            <span class="new-price">{{ product.price | number }} FCFA</span>
+                        </div>
+                        <button class="btn btn-dark w-100 mt-3" (click)="addToCart(product)">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>
+
+
+<app-footer></app-footer>
+
+</div>

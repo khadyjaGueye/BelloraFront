@@ -8,15 +8,15 @@
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="mb-3">
                     <label class="form-label">Nom</label>
-                    <input type="text" formControlName="firstName" class="form-control" [ngClass]="{'is-valid': form.get('firstName')?.valid && form.get('firstName')?.touched,
-                       'is-invalid': form.get('firstName')?.invalid && form.get('firstName')?.touched}">
+                    <input type="text" formControlName="first_name" class="form-control" [ngClass]="{'is-valid': form.get('first_name')?.valid && form.get('first_name')?.touched,
+                       'is-invalid': form.get('first_name')?.invalid && form.get('first_name')?.touched}">
                     <div class="invalid-feedback">Le nom est requis.</div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Prénom</label>
-                    <input type="text" formControlName="lastName" class="form-control" [ngClass]="{'is-valid': form.get('lastName')?.valid && form.get('lastName')?.touched,
-                       'is-invalid': form.get('lastName')?.invalid && form.get('lastName')?.touched}">
+                    <input type="text" formControlName="last_name" class="form-control" [ngClass]="{'is-valid': form.get('last_name')?.valid && form.get('last_name')?.touched,
+                       'is-invalid': form.get('last_name')?.invalid && form.get('last_name')?.touched}">
                     <div class="invalid-feedback">Le prénom est requis.</div>
                 </div>
 

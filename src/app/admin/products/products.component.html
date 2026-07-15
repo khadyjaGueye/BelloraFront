@@ -151,9 +151,7 @@
     </div>
 </div>
 
-
-<!-- Modal Edit -->
-<!-- Modal Edit -->
+<!-- Modal Edit Product-->
 <div class="modal fade" id="productModalEdit" tabindex="-1" aria-labelledby="productModalEditLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -212,7 +210,13 @@
                     </div>
 
                     <!-- Bouton -->
-                    <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
+                    <button type="submit" class="btn btn-primary mt-3">
+                        <span *ngIf="!isSubmitting">Enregistrer</span>
+                        <span *ngIf="isSubmitting">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Mis a jour...
+                        </span>
+                    </button>
                 </form>
             </div>
         </div>

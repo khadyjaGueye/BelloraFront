@@ -18,8 +18,8 @@ export class RegisterComponent {
   showPassword: boolean = false;
 
   form = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    first_name: ['', Validators.required],
+    lastname: ['', Validators.required],
     phone: ['', [Validators.required, Validators.pattern('^[0-9]{8,15}$')]], // 8 à 15 chiffres
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(5)]]

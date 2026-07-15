@@ -10,7 +10,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const token = localStorage.getItem('token');
 
     // Routes qui nécessitent obligatoirement un token (admin)
-    const requiresAuth = req.url.includes('/products') || req.url.includes('/profil');
+    const requiresAuth = req.url.includes('/products') || req.url.includes('/profil') || req.url.includes('/categories');
 
     if (token && requiresAuth) {
       const cloned = req.clone({

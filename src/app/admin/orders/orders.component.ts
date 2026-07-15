@@ -4,7 +4,6 @@ import { Order } from '../../core/models/data';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { log } from 'console';
 
 @Component({
   selector: 'app-orders',
