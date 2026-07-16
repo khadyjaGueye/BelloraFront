@@ -14,7 +14,7 @@ import { SkeletonComponent } from '../../shared/skeleton/skeleton.component';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxPaginationModule,SkeletonComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxPaginationModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -30,7 +30,8 @@ export class ProductsComponent implements OnInit {
   editPreviewUrl: string | ArrayBuffer | null = null;
   editSelectedFile: File | null = null;
   isSubmitting:boolean = false;
-  creatingTweet = false
+  creatingTweet = false;
+  isloading:boolean=true;
 
   constructor(
     private productService: ProductServiceService,
@@ -63,14 +64,14 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
-    this.loaderService.show(); 
+    this.isloading=true;
     this.productService.all().subscribe({
       next: (res: any) => {
         this.products = res.data.products;
-        this.loaderService.hide();
+        this.isloading=false
       },
       error: () => {
-        this.loaderService.hide();
+       this.isloading=false
       }
     });
   }
@@ -134,6 +135,7 @@ export class ProductsComponent implements OnInit {
           this.isSubmitting = false; // désactive le loader
         },
         error: (err) => {
+          this.isSubmitting = false;
           Swal.fire({
             icon: 'error',
             title: 'Erreur de connexion',

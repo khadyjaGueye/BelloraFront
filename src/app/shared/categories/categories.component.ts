@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Categorie } from '../../core/models/data';
 import { CategoryServiceService } from '../../core/services/category.service.service';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class CategoriesComponent implements OnInit {
 
-  categories: Categorie[] = []
+  categories: Categorie[] = [];
+   @Output() categorySelected = new EventEmitter<number>();
 
   constructor(private categoryService:CategoryServiceService) { }
 
@@ -25,6 +26,10 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.all().subscribe((res)=>{
       this.categories =res.data.categories;
     })
+  }
+
+    onCategoryClick(id: number) {
+    this.categorySelected.emit(id);
   }
 
 }

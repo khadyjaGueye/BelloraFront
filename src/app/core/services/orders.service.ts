@@ -14,4 +14,28 @@ export class OrdersService extends RestServiceService<Data> {
       http,
       `${environment.apiUrlNode}/orders`);
   }
+
+  getOrderCount() {
+    return this.http.get(`${environment.apiUrlNode}/orders/count/`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+  }
+
+  getOrderCountByStatus(status: Number) {
+    return this.http.get<Data>(`${environment.apiUrlNode}/orders/count/${status}/`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+  }
+
+  getClientCount(){
+      return this.http.get<Data>(`${environment.apiUrlNode}/orders/count/clients`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+  }
 }

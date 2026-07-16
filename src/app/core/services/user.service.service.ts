@@ -26,4 +26,12 @@ changePassword(data:any){
     }
   });
 }
+
+getUserCount(){
+  return this.http.get<Data>(`${environment.apiUrlNode}/users/count`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  });
+}
 }

@@ -16,17 +16,27 @@ export class OrdersComponent implements OnInit {
 
   orders: Order[] = [];
   selectedOrder: any = { status: 'en_attente', items: [] };
+  isloading:boolean=false;
+  loading = true;
 
   constructor(private ordersService: OrdersService) { }
 
   ngOnInit(): void {
     this.loadOrders();
+
   }
 
   loadOrders() {
+      this.loading = true;
     this.ordersService.all().subscribe({
-      next: (data) => this.orders = data.data.orders,
-      error: (err) => console.error(err)
+      next: (data) => {
+        this.orders = data.data.orders;
+         this.loading = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.loading = false;
+      }
     });
   }
 
@@ -36,8 +46,8 @@ export class OrdersComponent implements OnInit {
 
   updateStatus(order: any) {
     const status = { status: order.status }
-    console.log(status);
-
+  //  console.log(status);
+this.isloading=true;
     this.ordersService.update(status, order.id).subscribe({
       next: () => {
         Swal.fire({
@@ -46,8 +56,10 @@ export class OrdersComponent implements OnInit {
           text: 'Statut mis à jour avec succès.',
           confirmButtonText: 'OK'
         });
+        this.isloading=false;
       },
       error: (err) => {
+        this.isloading=false;
         Swal.fire({
           icon: 'error',
           title: 'Erreur de connexion',

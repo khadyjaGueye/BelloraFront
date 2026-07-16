@@ -16,7 +16,7 @@ import { log } from 'console';
 export class RegisterComponent {
 
   showPassword: boolean = false;
-
+  isloading:boolean=false;
   form = this.fb.group({
     first_name: ['', Validators.required],
     last_name: ['', Validators.required],
@@ -32,10 +32,11 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form);
-
+     // console.log(this.form);
+      this.isloading=true;
       this.authService.register(this.form.value).subscribe({
         next: (res) => {
+          this.isloading=false;
           Swal.fire({
             icon: 'success',
             title: 'Inscription réussie',
@@ -47,7 +48,8 @@ export class RegisterComponent {
 
         },
         error: (err) => {
-          console.error('Erreur inscription', err);
+          //console.error('Erreur inscription', err);
+          this.isloading=false;
           Swal.fire({
             icon: 'error',
             title: 'Erreur inscription',

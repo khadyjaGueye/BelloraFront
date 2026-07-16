@@ -1,37 +1,32 @@
-<section class="featured-section py-5">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Produits Vedettes</h2>
-            <p class="text-muted">
-                Les produits les plus appréciés par nos clientes
-            </p>
-        </div>
-
-        <div class="row g-4">
-            @for(product of products; track product.id){
-            <div class="col-md-3">
-                <div class="product-card">
-                    <!-- <img
-                        [src]="'http://localhost:3000/uploads/products/' + product.image"
-                        [alt]="product.name"> -->
-                    <img [src]="product.image" [alt]="product.name">
-                    <div class="product-content">
-                        <h5>{{ product.name }}</h5>
-                        <p class="text-muted">
-                            {{ product.description }}
-                        </p>
-                        <div class="price">
-                            <span class="new-price">
-                                {{ product.price | number }} FCFA
-                            </span>
-                        </div>
-                        <button class="btn btn-dark w-100 mt-3" (click)="addToCart(product)">
-                            Ajouter au panier
-                        </button>
-                    </div>
-                </div>
-            </div>
-            }
-        </div>
+<section class="featured-section py-5" *ngIf="categoryId">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Produits Vedettes</h2>
+      <p class="text-muted">
+        Les produits les plus appréciés par nos clientes
+      </p>
     </div>
+
+    <div *ngIf="noProducts" class="alert alert-warning text-center">
+      Aucun produit disponible pour cette catégorie.
+    </div>
+
+    <div class="row g-4" *ngIf="!noProducts">
+      <div class="col-md-3" *ngFor="let product of products" [@listAnimation]>
+        <div class="product-card" (click)="animateProduct(product)" [@clickAnimation]>
+          <img [src]="product.image" [alt]="product.name">
+          <div class="product-content">
+            <h5>{{ product.name }}</h5>
+            <p class="text-muted">{{ product.description }}</p>
+            <div class="price">
+              <span class="new-price">{{ product.price | number }} FCFA</span>
+            </div>
+            <button class="btn btn-dark w-100 mt-3" (click)="addToCart(product)">
+              Ajouter au panier
+            </button>
+          </div>
+        </div>
+      </div>    
+    </div>
+  </div>
 </section>

@@ -1,3 +1,10 @@
+<!-- Loader global -->
+<div *ngIf="isloading" class="global-loader">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Chargement...</span>
+  </div>
+</div>
+
 <div class="container-fluid mt-4">
     <div class="d-flex justify-content-end">
         <button class="btn btn-color" data-bs-toggle="modal" data-bs-target="#addProductModal">
@@ -6,30 +13,8 @@
     </div>
 </div>
 
-<!-- Skeleton Loader -->
-<div class="card mt-5 shadow-sm" *ngIf="loaderService.loading$ | async">
-    <div class="card-header">Liste des produits</div>
-    <div class="card-body">
-        <table class="table table-hover align-middle">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Image</th>
-                    <th>Libellé</th>
-                    <th>Prix</th>
-                    <th>Stock</th>
-                    <th colspan="3">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <app-skeleton *ngFor="let i of [1,2,3,4]"></app-skeleton>
-            </tbody>
-        </table>
-    </div>
-</div>
-
 <!-- Tableau Produits -->
-<div class="card mt-5 shadow-sm" *ngIf="!(loaderService.loading$ | async)">
+<div class="card mt-5 shadow-sm">
     <div class="card-header">Liste des produits</div>
     <div class="card-body">
         <table class="table table-hover align-middle">

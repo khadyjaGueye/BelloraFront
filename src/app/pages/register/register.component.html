@@ -47,7 +47,13 @@
                     <div class="invalid-feedback">Minimum 5 caractères.</div>
                 </div>
 
-                <button type="submit" class="btn btn-custom w-100">S'inscrire</button>
+                <button type="submit" class="btn btn-custom w-100">
+                    <span *ngIf="!isloading">S'inscrire</span>
+                    <span *ngIf="isloading">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Enregistrement...
+                    </span>
+                </button>
             </form>
 
         </div>

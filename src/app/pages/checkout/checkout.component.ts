@@ -21,7 +21,7 @@ export class CheckoutComponent implements OnInit {
 
   total = 0;
   items: any[] = [];
-
+  islording: boolean = false;
   form: FormGroup = new FormGroup({
     customer_name: new FormControl(''),
     customer_phone: new FormControl(''),
@@ -29,12 +29,16 @@ export class CheckoutComponent implements OnInit {
     note: new FormControl('')
   });
 
-  constructor(private cartService: CartService, private checkoutService: CheckoutService,  private router: Router,private utilService:UtilsService) { }
+  constructor(
+    private cartService: CartService,
+    private checkoutService: CheckoutService,
+    private router: Router,
+    private utilService: UtilsService
+  ) { }
 
   ngOnInit(): void {
 
     this.items = this.cartService.getItems();
-
     this.total = this.items.reduce(
       (sum, item) =>
         sum +
@@ -58,9 +62,11 @@ export class CheckoutComponent implements OnInit {
           price: item.product.price
         }))
     };
-    console.log(payload);
+    this.islording = true;
+    //console.log(payload);
     this.checkoutService.store(payload).subscribe({
       next: (response: any) => {
+        this.islording = false;
         Swal.fire({
           icon: 'success',
           title: 'Commande validée',
@@ -72,10 +78,12 @@ export class CheckoutComponent implements OnInit {
       },
 
       error: (error) => {
+        this.islording = false;
         Swal.fire({
           icon: 'error',
           title: 'Erreur',
-          text: 'Impossible d’enregistrer la commande.'
+          // text: 'Impossible d’enregistrer la commande.'
+          text: error.error?.data?.message || 'Une erreur est survenue.',
         });
       }
     });

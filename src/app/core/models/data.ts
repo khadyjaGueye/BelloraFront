@@ -14,8 +14,9 @@ export interface Data {
   user: User;
   checkout: Checkout;
   message: string;
-  success: boolean,
-  token: string
+  success: boolean;
+  token: string;
+  total:number;
 }
 
 export interface User {

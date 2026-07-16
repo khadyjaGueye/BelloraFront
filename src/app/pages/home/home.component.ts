@@ -16,4 +16,8 @@ import { CategoriesComponent } from '../../shared/categories/categories.componen
 })
 export class HomeComponent {
 
+  selectedCategoryId: number | null = null;
+
+  constructor(){}
+
 }

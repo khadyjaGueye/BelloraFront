@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
 
   showPassword: boolean = false;
+  isLoading: boolean = false;
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(5)]]
@@ -28,9 +29,11 @@ export class LoginComponent {
   onSubmit() {
     if (this.form.valid) {
       //console.log(this.form);
+      this.isLoading = true;
       this.authService.login(this.form.value).subscribe({
         next: (res) => {
           localStorage.setItem('token', res.data.token);
+          this.isLoading = false
           if (res.data.user.role === "admin") {
             this.router.navigate(['/dashbord']);
           } else {
@@ -38,8 +41,9 @@ export class LoginComponent {
           }
         },
         error: (err) => {
-          console.error('Erreur inscription', err);
-          Swal.fire({ 
+          // console.error('Erreur inscription', err);
+          this.isLoading = false;
+          Swal.fire({
             icon: 'error',
             title: 'Erreur de connexion',
             text: err.error?.data?.message || 'Une erreur est survenue.',

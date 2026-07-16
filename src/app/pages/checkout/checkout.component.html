@@ -18,19 +18,23 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Nom complet </label>
-                                <input formControlName="customer_name" type="text" class="form-control" placeholder="Votre nom">
+                                <input formControlName="customer_name" type="text" class="form-control"
+                                    placeholder="Votre nom">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label"> Téléphone</label>
-                                <input formControlName="customer_phone" type="text" class="form-control"  placeholder="77 000 00 00">
+                                <input formControlName="customer_phone" type="text" class="form-control"
+                                    placeholder="77 000 00 00">
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label"> Adresse de livraison  </label>
-                            <textarea formControlName="customer_address" rows="4" class="form-control"  placeholder="Votre adresse"> </textarea>
+                            <label class="form-label"> Adresse de livraison </label>
+                            <textarea formControlName="customer_address" rows="4" class="form-control"
+                                placeholder="Votre adresse"> </textarea>
                         </div>
-                        <div class="mb-3"><label class="form-label">  Note de commande  </label>
-                            <textarea formControlName="note" rows="3" class="form-control" placeholder="Informations complémentaires"> </textarea>
+                        <div class="mb-3"><label class="form-label"> Note de commande </label>
+                            <textarea formControlName="note" rows="3" class="form-control"
+                                placeholder="Informations complémentaires"> </textarea>
                         </div>
                     </form>
                 </div>
@@ -52,7 +56,13 @@
                         <span class="fw-bold">Total</span>
                         <span class="fw-bold fs-5 text-dark">{{ total | number }}FCFA</span>
                     </div>
-                    <button class="btn btn-dark w-100 py-3" (click)="onSubmit()"> Confirmer la commande</button>
+                    <button class="btn btn-dark w-100 py-3" (click)="onSubmit()">
+                        <span *ngIf="!islording">Confirmer la commande</span>
+                        <span *ngIf="islording">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Enregistrement...
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>

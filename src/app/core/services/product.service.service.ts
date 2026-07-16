@@ -15,12 +15,28 @@ export class ProductServiceService extends RestServiceService<Data> {
       `${environment.apiUrlNode}/products`);
   }
 
-  getByCategory(id: number | string) {
+  getByCategory(id: number | null) {
     return this.http.get(`${environment.apiUrlNode}/products/${id}/category`);
   }
 
   getLastProductsByCategories() {
     return this.http.get(`${environment.apiUrlNode}/products/categories/last-products`);
+  }
+
+  getCountProducts(){
+     return this.http.get<Data>(`${environment.apiUrlNode}/products/count`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  });
+  }
+
+  getCountByCategory(id:Number){
+        return this.http.get<Data>(`${environment.apiUrlNode}/products/count/${id}/`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  });
   }
 
 }

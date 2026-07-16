@@ -20,9 +20,9 @@
 
 </div>
 
-<app-categories></app-categories>
+<app-categories (categorySelected)="selectedCategoryId = $event"></app-categories>
+<app-featured-products [categoryId]="selectedCategoryId"></app-featured-products>
 
-<app-featured-products></app-featured-products>
 
 <app-promo-banner></app-promo-banner>
 
